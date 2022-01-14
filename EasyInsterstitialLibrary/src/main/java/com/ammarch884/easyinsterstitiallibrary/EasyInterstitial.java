@@ -18,10 +18,12 @@ public class EasyInterstitial {
     static Context mContext;
     static String interstitial_id;
     static String logTag = "Ads_";
+    public static isAlreadyLoaded = false;
 
     public static void load_interstitial(Context your_activity_context, String your_interstitial_id, String yourLogTag) {
 
-        mContext = your_activity_context;
+        if(!isAlreadyLoaded){
+            mContext = your_activity_context;
         interstitial_id = your_interstitial_id;
         logTag = yourLogTag;
 
@@ -37,6 +39,7 @@ public class EasyInterstitial {
                         // an ad is loaded.
                         mInterstitialAd = interstitialAd;
                         Log.d(logTag, "Insterstitial Loaded.");
+                        isAlreadyLoaded = true;
                     }
 
                     @Override
@@ -44,8 +47,11 @@ public class EasyInterstitial {
                         // Handle the error
                         Log.d(logTag, "Interstitial Failed to Load."+loadAdError.getMessage());
                         mInterstitialAd = null;
+                        isAlreadyLoaded = false;
                     }
                 });
+        }
+        
     }
 
 
@@ -58,6 +64,7 @@ public class EasyInterstitial {
                 super.onAdDismissedFullScreenContent();
 
                 onInterstitialClosedListener.OnInterstitialClosed();
+                isAlreadyLoaded = false;
                 EasyInterstitial.load_interstitial(mContext, interstitial_id, logTag);
             }
         });
