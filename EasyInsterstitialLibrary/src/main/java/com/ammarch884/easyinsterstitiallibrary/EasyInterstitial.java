@@ -22,13 +22,13 @@ public class EasyInterstitial {
 
     public static void load_interstitial(Context your_activity_context, String your_interstitial_id, String yourLogTag) {
 
+        mContext = your_activity_context;
+        interstitial_id = your_interstitial_id;
+        logTag = yourLogTag;
+        
         if(!isAlreadyLoaded){
-            mContext = your_activity_context;
-            interstitial_id = your_interstitial_id;
-            logTag = yourLogTag;
 
             Log.d(logTag, "Interstitial Load Request Sent.");
-
             AdRequest adRequest_interstitial = new AdRequest.Builder().build();
 
             InterstitialAd.load(mContext, your_interstitial_id, adRequest_interstitial,
