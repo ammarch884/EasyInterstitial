@@ -24,32 +24,34 @@ public class EasyInterstitial {
 
         if(!isAlreadyLoaded){
             mContext = your_activity_context;
-        interstitial_id = your_interstitial_id;
-        logTag = yourLogTag;
+            interstitial_id = your_interstitial_id;
+            logTag = yourLogTag;
 
-        Log.d(logTag, "Interstitial Load Request Sent.");
+            Log.d(logTag, "Interstitial Load Request Sent.");
 
-        AdRequest adRequest_interstitial = new AdRequest.Builder().build();
+            AdRequest adRequest_interstitial = new AdRequest.Builder().build();
 
-        InterstitialAd.load(mContext, your_interstitial_id, adRequest_interstitial,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        // The mInterstitialAd reference will be null until
-                        // an ad is loaded.
-                        mInterstitialAd = interstitialAd;
-                        Log.d(logTag, "Insterstitial Loaded.");
-                        isAlreadyLoaded = true;
-                    }
+            InterstitialAd.load(mContext, your_interstitial_id, adRequest_interstitial,
+                    new InterstitialAdLoadCallback() {
+                        @Override
+                        public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                            // The mInterstitialAd reference will be null until
+                            // an ad is loaded.
+                            mInterstitialAd = interstitialAd;
+                            Log.d(logTag, "Insterstitial Loaded.");
+                            isAlreadyLoaded = true;
+                        }
 
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        // Handle the error
-                        Log.d(logTag, "Interstitial Failed to Load."+loadAdError.getMessage());
-                        mInterstitialAd = null;
-                        isAlreadyLoaded = false;
-                    }
-                });
+                        @Override
+                        public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                            // Handle the error
+                            Log.d(logTag, "Interstitial Failed to Load."+loadAdError.getMessage());
+                            mInterstitialAd = null;
+                            isAlreadyLoaded = false;
+                        }
+            });
+        }else{
+            Log.d(logTag, "Interstitial Already Loaded. Request not Sent.");
         }
         
     }
