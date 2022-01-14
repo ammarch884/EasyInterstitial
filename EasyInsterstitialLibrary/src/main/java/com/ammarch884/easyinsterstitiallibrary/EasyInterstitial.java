@@ -18,7 +18,7 @@ public class EasyInterstitial {
     static Context mContext;
     static String interstitial_id;
     static String logTag = "Ads_";
-    public static isAlreadyLoaded = false;
+    public static boolean isAlreadyLoaded = false;
 
     public static void load_interstitial(Context your_activity_context, String your_interstitial_id, String yourLogTag) {
 
