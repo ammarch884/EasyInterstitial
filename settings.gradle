@@ -1,0 +1,3 @@
+include ':EasyInsterstitialLibrary'
+include ':app'
+rootProject.name = "EasyInterstitial"
