@@ -59,8 +59,9 @@ public class EasyInterstitial {
 
     public static void show_insterstitial(Activity yourActivity, OnInterstitialClosedListener onInterstitialClosedListener){
 
-        mInterstitialAd.show(yourActivity);
-        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
+        if(isAlreadyLoaded){
+            mInterstitialAd.show(yourActivity);
+            mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
             @Override
             public void onAdDismissedFullScreenContent() {
                 super.onAdDismissedFullScreenContent();
@@ -69,6 +70,11 @@ public class EasyInterstitial {
                 isAlreadyLoaded = false;
                 EasyInterstitial.load_interstitial(mContext, interstitial_id, logTag);
             }
-        });
+            });
+        }else{
+            Log.d(logTag, "Interstitial was not Loaded.");
+            EasyInterstitial.load_interstitial(mContext, interstitial_id, logTag);
+        }
+            
     }
 }
